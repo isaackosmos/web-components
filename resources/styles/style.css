@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   color: white;
   font-family: 'Poppins', sans-serif;
 }
-body{
+body {
   background-image: url('../images/53-light-purple-gradient.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,7 +19,7 @@ body{
   justify-content: center;
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   max-width: 550px;
@@ -28,16 +28,46 @@ body{
   gap: 10px;
 }
 
-.title{
+.title {
   font-size: 50px;
 }
-.subtitle{
+.subtitle {
   font-size: 30px;
 }
-.description{
+.description {
   font-size: 20px;
 }
-.links{
+.links {
   display: flex;
   justify-content: space-between;
+}
+.ex {
+  height: 300px;
+}
+
+.browsers-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.browser {
+  width: 100%;
+  font-size: 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid transparent;
+  padding: 15px;
+  border-radius: 10px;
+
+  transition: 0.5s;
+}
+.logo {
+  width: 60px;
+}
+.browser:hover {
+  border: 1px solid white;
 }

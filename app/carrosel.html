@@ -1,0 +1,75 @@
+<!-- HTML do componente de carrossel -->
+<template id="carousel-template">
+  <style>
+    /* Estilos do carrossel */
+    .carousel {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .carousel-item {
+      flex: 0 0 100%;
+      transition: transform 0.3s ease-in-out;
+    }
+  </style>
+  
+  <div class="carousel">
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+  // Código JavaScript para registrar o componente
+  class CarouselComponent extends HTMLElement {
+    constructor() {
+      super();
+      
+      // Cria um shadow root e anexa o template
+      const shadowRoot = this.attachShadow({ mode: 'open' });
+      const template = document.querySelector('#carousel-template');
+      shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+
+    connectedCallback() {
+      // Adiciona eventos de clique para avançar e retroceder no carrossel
+      const carouselItems = this.shadowRoot.querySelectorAll('.carousel-item');
+      let currentIndex = 0;
+      
+      this.addEventListener('click', (event) => {
+        const target = event.target;
+        
+        if (target.classList.contains('prev')) {
+          currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+        } else if (target.classList.contains('next')) {
+          currentIndex = (currentIndex + 1) % carouselItems.length;
+        }
+        
+        this.updateCarousel(currentIndex);
+      });
+    }
+
+    updateCarousel(index) {
+      const carousel = this.shadowRoot.querySelector('.carousel');
+      const carouselItems = this.shadowRoot.querySelectorAll('.carousel-item');
+      const itemWidth = carouselItems[0].offsetWidth;
+
+      carousel.style.transform = `translateX(-${index * itemWidth}px)`;
+    }
+  }
+
+  // Registra o componente customizado
+  customElements.define('carousel-component', CarouselComponent);
+</script>
+
+<!-- Exemplo de uso do componente -->
+<carousel-component>
+  <div class="carousel-item">
+    <img src="imagem1.jpg" alt="Imagem 1">
+  </div>
+  <div class="carousel-item">
+    <img src="imagem2.jpg" alt="Imagem 2">
+  </div>
+  <div class="carousel-item">
+    <img src="imagem3.jpg" alt="Imagem 3">
+  </div>
+</carousel-component>
